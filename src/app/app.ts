@@ -1,12 +1,15 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 import { ProfileCard } from './profile-card/profile-card';
+import { Header } from './header/header';
+import { Skills } from './skills/skills';
+import { Footer } from './footer/footer';
+import { Proficiency } from './proficiency';
 
 @Component({
-  imports: [RouterOutlet, ProfileCard],
   selector: 'app-root',
-  styleUrl: './app.css',
+  imports: [ProfileCard, Header, Skills, Footer],
   templateUrl: './app.html',
+  styleUrl: './app.css'
 })
 export class App {
   fullName = 'Daniella Faith Cortez';
@@ -25,13 +28,17 @@ export class App {
     'MySQL',
     'Python'
   ];
+   proficiencies: Proficiency[] = [
+    { tool: 'Visual Studio Code', level: 'Advanced' },
+    { tool: 'Git and GitHub', level: 'Intermediate' },
+    { tool: 'Node.js and npm', level: 'Intermediate' },
+    { tool: 'Angular CLI', level: 'Beginner' }
+  ];
 
   message = 'Welcome to my profile!';
-  clickCount = 0;
-
-  showMessage() {
-    this.clickCount++;
-    this.message = `You clicked the button ${this.clickCount} time(s).`;
+  // Runs when the Skills component emits a skillSelected event.
+  onSkillSelected(skill: string) {
+    this.message = `You selected: ${skill}`;
   }
 }
 
